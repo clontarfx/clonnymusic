@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Unbenanntes Dokument</title>
+<link href="base.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#000033" text="#FFFF00" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="standard">
+<p>You can enable more powerful views using the custom query language.</p>
+<p class="head3">The basic format is:</p>
+<p>&lt;field&gt; &lt;comparison&gt; [value] [&lt;logic operator&gt; &lt;field&gt; &lt;comparison&gt; [value] [...]]</p>
+<p class="head3">Field names:</p>
+<p>  TYPE: 0 for audio files, 1 for video files<br>
+  FILENAME: Full filename (including path)<br>
+  LENGTH: Length, in seconds (or hh:mm:ss)<br>
+  ARTIST: Artist<br>
+  ALBUM: Album<br>
+  ALBUMARTIST: Album Artist<br>
+  TITLE: Title<br>
+  TRACKNO: Track number of file<br>
+  GENRE: Genre<br>
+  YEAR: Year<br>
+  COMMENT: Comment<br>
+  COMPOSER: Composer<br>
+  DISC: Disc number of a CD set<br>
+  FILESIZE: File size, in kilobytes<br>
+  FILETIME: Last known file date/time on disk<br>
+  FOLDER: Containing folder<br>
+  LASTUPD: Date/time of file imported to library or modified in library<br>
+  LASTPLAY: Date/time of last play<br>
+  RATING: Rating value (1-5, or 0 or empty for unrated)<br>
+  PLAYCOUNT: Number of plays<br>
+  PUBLISHER: Publisher or record label<br>
+  REPLAYGAIN_ALBUM_GAIN: ReplayGain Album Gain<br>
+  REPLAYGAIN_TRACK_GAIN: ReplayGain Track Gain<br>
+  BITRATE: Bitrate (in KBPS)<br>
+  TRACKS: Total number of tracks in the disc<br>
+  DISCS: Total number of discs in the set<br>
+  ISPODCAST: 1 for a podcast episode, 0 otherwise<br>
+  PODCASTCHANNEL: The name of the channel for a podcast<br>
+  PODCASTPUBDATE: Date/time when the podcast was published</p>
+<p class="head3">Comparison operators:</p>
+<p>  '=': String or integer equals value<br>
+  '!=': String or integer does not equal value<br>
+  '&lt;': String or integer is less than value<br>
+  '&gt;': String or integer is greater than value<br>
+  '&lt;=': String or integer is less than or equal to value<br>
+  '&gt;=': String or integer is greater than or equal to value<br>
+  HAS: String contains value<br>
+  NOTHAS: String does not contain value<br>
+  LIKE: String is similar to value (&quot;the&quot; and whitespace are ignored)<br>
+  BEGINS: String begins with value<br>
+  BEGINSLIKE: String begins like value<br>
+  ENDS: String ends with value<br>
+  ISEMPTY: (no comparison value required) TRUE if &lt;field&gt; is empty<br>
+  ISNOTEMPTY: (no comparison value required) TRUE if &lt;field&gt; is not empty</p>
+<p class="head3">Values:</p>
+<p>&quot;strings with spaces&quot; or strings_without_spaces<br>
+  integers can be &quot;32&quot; or just 32<br>
+  integers for LENGTH can be a plain integer (seconds), or mm:ss or hh:mm:ss<br>
+  date/timestamps should be [datetime data], which can be either an absolute<br>
+  or relative time. i.e.: [3 weeks ago], [18:15],  [05/30/2003],<br>
+  [yesterday noon], [3 days ago 5 pm], [now], [5 mn before may 30th], etc.</p>
+<p class="head3">Logic operators:</p>
+<p>&amp;&amp;, &amp;, or AND: boolean AND two comparisons<br>
+  ||, |, or OR: boolean OR two comparisons<br>
+  !, or NOT: prefix this to an expression for the boolean NOT of that expression</p>
+<p class="head3">Examples:</p>
+<p>  all video files: type = 1<br>
+  audio by Air longer than 4 minutes: type = 0 &amp; artist = &quot;air&quot; &amp; length &gt; 4:00<br>
+  all files on drive C: filename BEGINS C:<br>
+  high rated items that haven't been played lately: rating &gt; 3 &amp; lastplay &lt; [1 week ago]<br>
+  newly added items that haven't been played yet: lastupd &gt;= [yesterday] &amp; playcount &gt; 0</p>
+<p>Note that you can also use this syntax in the search field of views. Simply prefix a '?' or 'query:' to your search string.</p>
+</body>
+</html>

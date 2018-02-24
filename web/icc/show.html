@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!--
+<meta http-equiv="refresh" content="15;URL=index.html?refresh">
+-->
+<title>ClonnyMusic Album Art View</title>
+
+<link href="base.css" rel="stylesheet" type="text/css">
+
+
+<script type="text/javascript">
+<!--
+var Netscape = new Boolean();
+if(navigator.appName == "Netscape")  Netscape = true;
+else Netscape = false;
+
+
+var SecondsRemain = <#SongRemainSec> + <#SongRemainMin>*60;
+var TrackPos = <#SongPositionSec> + <#SongPositionMin>*60;
+var TotalSeconds = <#SongLengthSec> + <#SongLengthMin>*60;
+var Status = <#status on_play=true on_stop=false on_pause=false>;
+
+function changeImage()
+ {
+ return;
+ // no longer used
+ if(document.getElementById("coverart").width == 1)
+ 	{
+ 	document.getElementById("coverart").src = "<#inifile section=layout key=coverfilename default=front.jpg>?src=<#CurrentTrackDirectory urlencoded=1>";
+	}
+ document.getElementById("coverart").width = <#inifile section=layout key=showwidth default=400>;
+ document.getElementById("coverart").height= <#inifile section=layout key=showheight default=400>;
+ }
+
+function ReloadPage()
+ {
+ var currentURL  = "";
+ currentURL += document.location;
+
+ if(SecondsRemain)
+    Countdown = window.setTimeout("top.location.href='show.html?refresh'",Math.min(Math.max(5000,SecondsRemain*1000),30000));
+
+ if(Status) window.setTimeout("UpdateTime()",1000);
+ }
+
+
+function RequestPage(url)
+ {
+ var currentURL  = "";
+ currentURL += document.location;
+
+	if(currentURL.indexOf("?") > 0)
+		var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+	else var newURL = currentURL;
+
+	if(Netscape) top.location.href = newURL + url;
+	else
+		{
+		var redir =  "top.location.href='" + newURL + url + "'";
+		window.setTimeout(redir,0);
+		}
+ }
+function UpdateTime()
+ {
+ var content="-";
+ SecondsRemain--;
+ TrackPos++;
+
+ SecondsRemain = (SecondsRemain<0)?0:SecondsRemain;
+
+ if(SecondsRemain < 600) content+="0";
+ content+=Math.floor(SecondsRemain/60) + ":"
+ if((SecondsRemain%60) < 10) content+="0";
+ content+=SecondsRemain%60;
+ document.getElementById("timer").innerHTML = content;
+
+ content="";
+ if(TrackPos < 600) content="0";
+ content+=Math.floor(TrackPos/60) + ":"
+ if((TrackPos%60) < 10) content+="0";
+ content+=TrackPos%60;
+ document.getElementById("timerpos").innerHTML = content;
+ document.getElementById("progressBar").width = Math.max(1,TrackPos/TotalSeconds*document.getElementById("progressBarCell").width) ;
+
+ if(Status)	window.setTimeout("UpdateTime()",1000);
+ }
+
+function findPosX(obj)
+{
+	var curleft = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+			curleft += obj.offsetLeft
+			obj = obj.offsetParent;
+		}
+	}
+	else if (obj.x)
+		curleft += obj.x;
+	return curleft;
+}
+
+function findPosY(obj)
+{
+	var curtop = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+			curtop += obj.offsetTop
+			obj = obj.offsetParent;
+		}
+	}
+	else if (obj.y)
+		curtop += obj.y;
+	return curtop;
+}
+
+function clickProgressBar(Element, myevent)
+{
+var x;
+ if(Netscape) x = myevent.pageX - findPosX(Element); // x relative to the table cell
+ else x = window.event.offsetX; // x relative to the table
+ RequestPage("?playifnotplaying&trackpos=" + parseInt(Math.ceil(100*x/Element.width)));
+//document.location.href = "?playifnotplaying&trackpos=" + parseInt(100*x/Element.width);
+}
+
+
+function clickVolumeBar(Element, myevent)
+{
+var x;
+ if(Netscape) x = myevent.pageX - findPosX(Element); // x relative to the table cell
+ else x = window.event.offsetX; // x relative to the table cell
+ RequestPage("?volume=" + parseInt(100*x/Element.width));
+}
+
+function clickEqualizerBar(whatband, myevent, Element)
+{
+var y;
+ var myheight = document.getElementById("eqspacer").height;      // height of table
+
+ if(Netscape) y = myevent.pageY - findPosY(Element);
+ else
+ 	{
+	if(window.event.srcElement.tagName == "TD") y = event.offsetY;
+	else y = myheight - (window.event.srcElement.height - window.event.offsetY);
+	}
+ RequestPage("?"+whatband+"_seteq=" + parseInt(100*(myheight-y*2)/myheight));
+//document.location.href = "?"+whatband+"_seteq=" + parseInt(100*(myheight-y*2)/myheight);
+}
+
+function resetEqualizer()
+{
+var x;
+var url = "?";
+ for(x=0;x<10;x++)
+ 	url+=x+"_seteq=0&";
+
+ RequestPage(url);
+}
+
+
+function resizeFrame()
+{
+if(Netscape)
+	{
+//	document.getElementById("maintable").style.height = window.innerHeight - 8 + "px";
+	document.getElementById("innertable").style.height = window.innerHeight - 8 + "px";
+	}
+}
+//-->
+</script>
+
+</head>
+<body text="#FFFF00" bgcolor="#000033" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="3" topmargin="3" marginwidth="3" marginheight="3" onLoad="ReloadPage();resizeFrame();changeImage();" onResize="resizeFrame();">
+<center>
+  <table width="100%" id="maintable" height="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
+    <tr>
+      <td height="0" align="center" valign="top" bgcolor="#000033"> <table id="innertable" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="100%" colspan="2" align="center" valign="top"><p><font size="6" face="Verdana, Arial, Helvetica, sans-serif"><strong><#Metadata field=title></strong> by <strong><#Metadata field=artist></strong> (<#Metadata field=album>)<br><br></font>
+				<script language="JavaScript" type="text/JavaScript">
+					stars = <#CurrentFileInfo item=rating>;
+					for(x=0;x<stars;x++) document.write("<img src=\"GFX/gstar1.gif\" border=\"0\">");
+				</script>
+
+				<img src="<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>" width="<#inifile section=layout key=showwidth default=400>" height="<#inifile section=layout key=showheight default=400>" id="coverart" border="0"><br><br>
+				<font face="Verdana">
+		          	<a href="index.html">ClonnyMusic Home</a> :: 
+					<a href="index.html?page=playlist">Playlist</a> :: 
+					<a href="index.html?page=medialibrary">Library</a> :: 
+					<a href="index.html?page=browser">Browser</a> :: 
+					<a href="index.html?page=options">Options (Disabled)</a>
+				</font>
+			  </p>
+			</td>
+          </tr>
+          <tr valign="bottom">
+            <td width="100%" align="center"><img src="gfx/clearpixel.gif" width="1" height="4" id="probe">
+              <table width="100%" id="balls" border="0" cellpadding="0" cellspacing="1" bgcolor="#003399">
+                <tr>
+                  <td width="80%" align="center" bgcolor="#000033" class="small"><img src="gfx/clearpixel.gif" width="1" height="4"><br>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                      <tr align="center">
+                        <!-- <td valign="bottom" class="small"><a href="#reverse" onClick="javascript:RequestPage('?reverse');"><img src="GFX/rewind.gif" width="24" height="24" border="0"></a></td> -->
+                        <td class="small" style="color:white"><strong><span class="head1" id="timerpos"><#SongPositionMin>:<#SongPositionSec></span></strong><br>
+                          <strong><span class="head2" id="timer">-<#SongRemainMin>:<#SongRemainSec></span></strong><br>
+                          <a href="#" onClick="clickProgressBar();"> </a> <table border="0" cellpadding="0" cellspacing="1" bgcolor="003366" width="300" title="click bar to move to a position">
+                            <tr>
+                              <td onClick="" class="small" align="left" width="300" bgcolor="#000033" id="progressBarCell"><img src="gfx/bluepixel.gif" width="1" height="8" id="progressBar" border="0"></td>
+                            </tr>
+                          </table>
+                          <script language="JavaScript" type="text/JavaScript">
+document.getElementById("progressBar").width = Math.max(1,TrackPos/TotalSeconds*document.getElementById("progressBarCell").width) ;
+</script> </td>
+                        <!-- <td valign="bottom" class="small"><a href="#forward" onClick="javascript:RequestPage('?forward');"><img src="GFX/fastforward.gif" width="24" height="24" border="0"></a></td> -->
+                      </tr>
+                    </table>
+                    <span class="small" style="color:white"><#status on_play="playing
+                    @" on_stop=stopped, on_pause=paused> <#Bitrate>kbps, <#Samplerate>kHz
+                    <#Channels on_stereo=stereo on_mono=mono>&nbsp;&nbsp;&nbsp;&nbsp;rate this file: <a href="?usefile=<#CurrentTrackFilename>&rating=0">0</a>
+                    <a href="?usefile=<#CurrentTrackFilename>&rating=1">1</a>
+                    <a href="?usefile=<#CurrentTrackFilename>&rating=2">2</a>
+                    <a href="?usefile=<#CurrentTrackFilename>&rating=3">3</a>
+                    <a href="?usefile=<#CurrentTrackFilename>&rating=4">4</a>
+                    <a href="?usefile=<#CurrentTrackFilename>&rating=5">5</a></span> </td>
+                </tr>
+              </table>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="20"></td>
+                  <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+                  <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+                  <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+                  <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+                </tr>
+                <tr align="center" valign="top">
+                  <td><a href="#prev" onClick="javascript:RequestPage('?prev');"><img src="./gfx/prev.gif" alt="back" width="100" height="31" border="0"></a></td>
+                  <td><a href="#play" onClick="javascript:RequestPage('?play');"><img src="./gfx/play.gif" alt="play" width="100" height="31" border="0"></a></td>
+                  <td><a href="#pause" onClick=""><img src="./gfx/pause.gif" alt="pause" width="100" height="31" border="0"></a></td>
+                  <td><a href="#stop" onClick=""><img src="./gfx/stop.gif" alt="stop" width="100" height="31" border="0"></a></td>
+                  <td><a href="#next" onClick="javascript:RequestPage('?next');"><img src="./gfx/next.gif" alt="next" width="100" height="31" border="0"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+  </center>
+</body>
+</html>

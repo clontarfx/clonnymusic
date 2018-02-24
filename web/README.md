@@ -1,0 +1,1 @@
+Used by BrowseAmp to serve web content.

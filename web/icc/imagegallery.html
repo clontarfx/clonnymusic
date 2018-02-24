@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<#Charset>">
+
+<!--
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="refresh" content="1">
+-->
+<title>ClonnyMusic Image Gallery</title>
+<link href="base.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript" type="text/JavaScript">
+function setCheckboxes(the_form, do_check)
+{
+var elts = document.forms[the_form].elements['add'];
+var elts_cnt = elts.length;
+for (var i = 0; i < elts_cnt; i++)
+	{
+	elts[i].checked = do_check;
+    }
+return true;
+}
+
+function invertCheckboxes(the_form)
+{
+var elts      = document.forms[the_form].elements['add'];
+var elts_cnt  = elts.length;
+for (var i = 0; i < elts_cnt; i++)
+	{
+	if(elts[i].checked) elts[i].checked = false;
+	else elts[i].checked = true;
+    }
+return true;
+}
+</script>
+					
+</head>
+<body text="#FFFF00" bgcolor="#000033" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<center>
+  <p class="standard"><a href="imagegallery.html?refresh">refresh</a></p>
+  <p class="standard"><a href="imagegallery.html?home">back to home folder</a></p>
+  <p class="standard">Current folder: 
+<script language="JavaScript" type="text/JavaScript">
+var dir = "<#CurrentBrowserDirectory escape=true>";
+var folder = dir.split('\\');
+var tmp = "";
+for(x=0; x<folder.length; x++)
+	{
+	tmp += folder[x];
+	if(x==0) document.write("<a href=\"?dir="+tmp+"\\\">"+folder[x]+"</a>" + "\\");
+	else if(x==(folder.length-1)) document.write("<a href=\"?dir="+tmp+"\">"+folder[x]+"</a>");
+	else document.write("<a href=\"?dir="+tmp+"\">"+folder[x]+"</a>" + "\\");
+	tmp +="\\";
+	}
+</script>
+</p>
+    <#include file=templates/gallery_template.html> 
+  <p class="standard"><a href="imagegallery?refresh">refresh</a>
+  
+  </center>
+</body>
+</html>

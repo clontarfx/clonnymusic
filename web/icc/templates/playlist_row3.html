@@ -1,0 +1,12 @@
+  <tr title="added by <#playlist_addedby default=someone>" bgcolor="#000033">
+  <td nowrap><#playlist_index></td>
+  <td nowrap width="100%"><input name="removesong" type="checkbox" id="remove" value="<#playlist_songid>"> <a href="index.html?playtrack=<#playlist_songid>&page=playlist" title="<#playlist_filename>" target="_top"><#playlist_songtitle></a>
+  <a href="#Bigger" onClick="javascript:window.open('<#inifile section=layout key=playlistcover parse=1 default=gfx/clearpixel.gif>', 'Fotofenster', 'width=480,height=400,scrollbars,resizable,dependent');" title="click to see cover art"><img src="./gfx/icon_image.gif" border="0"></a>
+<!--
+<a href="#Bigger" onClick="javascript:window.open('<#playlist_artist urlencoded=1>.jpg?src=<#playlist_directory urlencoded=1>', 'Fotofenster', 'width=480,height=400,scrollbars,resizable,dependent');" title="click to see cover art"><img src="./gfx/icon_image.gif" border="0"></a>
+-->
+  
+  </td>
+ 
+  <td nowrap align="center"><a href="?moveup=<#playlist_songid>"><img src="./gfx/up.gif" border="0"></a><a href="?movedn=<#playlist_songid>"><img src="./gfx/down.gif" border="0"></a>&nbsp;<#playlist_songlengthmin>:<#playlist_songlengthsec>&nbsp;<a href="?removesong=<#playlist_songid>"><img src="../gfx/icon_trash.gif" border="0" title="remove '<#playlist_songtitle>' from playlist"></a></td>
+  </tr>

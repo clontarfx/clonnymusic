@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<#Charset>">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>ClonnyMusic Options</title>
+<link href="base.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+<!--
+var Netscape = new Boolean();
+if(navigator.appName == "Netscape")  Netscape = true;
+else Netscape = false;
+
+function SetFilenames()
+ {
+ 
+ if(document.coversource.embedded.checked == true)
+ 	{
+ 	document.coversource.coverfilename_setini.value = "cover.jpg?usefile="+"<"+"#CurrentTrackFilename urlencoded=1>&albumart";
+ 	document.coversource.playlistcover_setini.value = "cover.jpg?usefile="+"<"+"#playlist_filename urlencoded=1>&albumart";
+ 	}
+ else
+ 	{
+ 	document.coversource.coverfilename_setini.value = document.coversource.filename.value + "?src="+"<"+"#CurrentTrackDirectory urlencoded=1>";
+ 	document.coversource.playlistcover_setini.value = document.coversource.filename.value + "?src="+"<"+"#playlist_directory urlencoded=1>";
+ 	}
+ }
+//-->
+</script>
+
+</head>
+<body text="#FFFF00" bgcolor="#000033" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<center>
+  <table width="560" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>Credits:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> &nbsp;eXtended skin created by Henry Thasler</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>Server Time:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> &nbsp;<#date format="dddd, dd. mmmm yyyy"> - <#time format="hh:nn:ss"></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>Server Uptime:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> &nbsp;<#server_uptime></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>Winamp Version:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> &nbsp;<#PlayerVersion></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>BrowseAmp 
+        Version:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275">&nbsp;<#BrowseampVersion></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285">&nbsp;</td>
+      <td class="standard" valign="top" width="275">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>Current User:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275">&nbsp;<#CurrentUser></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>tracks added:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275">&nbsp;<#user_tracks_added> of <#user_tracks_limit> per hour</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>MP3 Root 
+        Directory:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275">&nbsp;<#RootDirectory></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285">&nbsp;</td>
+      <td class="standard" valign="top" width="275">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>remove-played-tracks:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275">&nbsp;<a href="?removeplayed"><#RemovePlayedStatus></a></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right"><b>keep-playlist-alive:&nbsp;</b></td>
+      <td class="standard" valign="top">&nbsp;<a href="?keepplaylistalive"><#KeepPlaylistAliveStatus></a></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right"><b>Winamp window lock:&nbsp;</b></td>
+      <td class="standard" valign="top">&nbsp;<a href="?lock"><#LockStatus on=active 
+        off=disabled></a></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right">&nbsp;</td>
+      <td class="standard" valign="top">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right"><b>cover art source:&nbsp;</b></td>
+      <td class="standard" valign="top"><form action="index.html" method="get" name="coversource" target="_top">
+            <input name="page" type="hidden" value="options">
+            <input name="inisection" type="hidden" value="layout">
+            <input name="playlistcover_setini" type="hidden" value="cover.jpg?usefile=&lt;#playlist_filename urlencoded=1&gt;&albumart">
+            <input name="coverfilename_setini" type="hidden" value="cover.jpg?usefile=&lt;#CurrentTrackFilename urlencoded=1&gt;&albumart">
+            <input type="radio" name="embedded">
+            embedded picture (ID3v2-Tag)</label>
+          <br>
+            <input type="radio" name="fromfile">
+           <input name="filename" type="text">
+          </label>
+
+          <br>
+          <input type="submit" name="Submit" value="set" onClick="javascript:SetFilenames();">
+		  
+        </form></td>
+    </tr>
+
+<script language="JavaScript" type="text/JavaScript">
+var coverfilename = "<#inifile section=layout key=coverfilename default=cover.jpg?src=&lt;#CurrentTrackDirectory urlencoded=1&gt;>";
+var playlistfilename = "<#inifile section=layout key=playlistcover default=cover.jpg?usefile=&lt;#playlist_filename urlencoded=1&gt;&albumart>";
+document.coversource.filename.value = coverfilename.substring(0,coverfilename.indexOf("%3F"));
+</script>
+
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"><b>cover art 
+        size:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"><form action="index.html" method="get" name="form1" target="_top">
+          <input name="page" type="hidden" value="options">
+          <input name="inisection" type="hidden" value="layout">
+          header : 
+          <input name="coverwidth_setini" type="text" value="<#inifile section=layout key=coverwidth default=120>" size="5">
+          x 
+          <input name="coverheight_setini" type="text" value="<#inifile section=layout key=coverheight default=120>" size="5">
+          <br>
+          show&nbsp;&nbsp;&nbsp; : 
+          <input name="showwidth_setini" type="text" value="<#inifile section=layout key=showwidth default=400>" size="5">
+          x 
+          <input name="showheight_setini" type="text" value="<#inifile section=layout key=showheight default=400>" size="5">
+          <input type="submit" name="Submit" value="save">
+        </form></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285">&nbsp;</td>
+      <td class="standard" valign="top" width="275">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"> <b>select skin:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> <table border="0" cellspacing="0" cellpadding="0" class="standard">
+          <#SkinList template=templates/skin_template.html> 
+        </table>
+        <p>&nbsp;</p></td>
+    </tr>
+    <tr> 
+      <td class="standard" valign="top" align="right" width="285"> <b>select language:&nbsp;</b></td>
+      <td class="standard" valign="top" width="275"> <div align="left"> 
+          <form method="get" action="options.html">
+            <select name="charset" onChange="this.form.submit();">
+              <option selected="1">Current: <#Charset></option>
+              <option value="iso-8859-1">Latin-1</option>
+              <option value="iso-8859-2">Latin-2</option>
+              <option value="iso-8859-3">Latin-3</option>
+              <option value="iso-8859-4">Latin-4</option>
+              <option value="iso-8859-5">Cyrillic</option>
+              <option value="iso-8859-6">Arabic</option>
+              <option value="iso-8859-7">Greek</option>
+              <option value="iso-8859-8">Hebrew</option>
+              <option value="iso-8859-9">Latin-5</option>
+              <option value="iso-8859-10">Latin-6</option>
+            </select>
+            <noscript>
+            <input type="submit" value="Go" />
+            </noscript>
+          </form>
+        </div></td>
+    </tr>
+  </table>
+  <p class="standard"><strong>misc ops</strong></p>
+  <p class="standard">Balance: <a href="?balance=-100">L</a><a href="?balance=-75">-</a><a href="?balance=-50">-</a><a href="?balance=-25">-</a><a href="?balance=0">C</a><a href="?balance=25">-</a><a href="?balance=50">-</a><a href="?balance=75">-</a><a href="?balance=100">R</a><img src="gfx/clearpixel.gif" width="10" height="1"><#Balance>%</p>
+<!--  
+  <table border="0" cellpadding="0" cellspacing="1" bgcolor="003366" width="100" title="click bar to move to a position">
+    <tr> 
+      <td onClick="clickBalanceBar(this, event);" class="small" align="right" width="50" bgcolor="#000033" id="BalanceBarCell"><img src="gfx/bluepixel.gif" width="1" height="8" id="BalanceLeft" border="0"></td>
+      <td onClick="clickBalanceBar(this, event);" class="small" align="left" width="50" bgcolor="#000033" id="BalanceBarCell"><img src="gfx/bluepixel.gif" width="1" height="8" id="BalanceRight" border="0"></td>
+    </tr>
+  </table>
+  <script language="JavaScript" type="text/JavaScript">
+document.getElementById("progressBar").width = Math.max(1,TrackPos/TotalSeconds*document.getElementById("BalanceBarCell").width) ; 
+</script>
+-->
+  <p class="standard"><b>special ops (Admin privileges required)</b></p>
+  <p class="standard"><a href="options.html?minimize"> minimize Winamp</a><br>
+    <a href="options.html?close"> close Winamp</a><br>
+    <a href="options.html?restart">restart Winamp</a></p>
+  <p class="standard"><a href="options.html?standby">standby server</a><a href="options.html?reboot"><br>
+    reboot server</a><br>
+    <a href="options.html?shutdown">shutdown server</a></p>
+  <p class="standard"><a href="#Log" onClick="javascript:window.open('logfile?logfile', 'Fotofenster', 'width=480,height=400,scrollbars,resizable,dependent');">view 
+    server log</a></p>
+  <p class="standard"><a href="options.html?execute">execute VIS plug-in</a></p>
+  <p class="standard"><a href="options.html?fullscreen">fullscreen video</a></p>
+  <p class="standard">&nbsp;</p>
+  </center>
+</body>
+</html>

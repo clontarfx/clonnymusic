@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ClonnyMusic Track Information</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="base.css" rel="stylesheet" type="text/css">
+
+<!--
+<meta http-equiv="refresh" content="1"> 
+-->
+
+<script language="JavaScript" type="text/JavaScript">
+var SecondsRemain;	//used for timer
+var Status;
+
+function ReloadPage() 
+ {
+ SecondsRemain = <#SongRemainSec> + <#SongRemainMin>*60;
+ Status = <#status on_play=true on_stop=false on_pause=false>;
+ Countdown = window.setTimeout("top.location.href='index.html?refresh'",SecondsRemain*1000);
+ if(Status) window.setTimeout("UpdateTime()",1000);
+ } 
+ 
+function UpdateTime()
+ {
+ var content="";
+ SecondsRemain--;
+
+ if(SecondsRemain < 600) content="0";
+ content+=Math.floor(SecondsRemain/60) + ":" 
+ if((SecondsRemain%60) < 10) content+="0";
+ content+=SecondsRemain%60;
+
+ document.getElementById("timer").innerHTML = content; 
+
+ if(Status) window.setTimeout("UpdateTime()",1000);
+ } 
+ 
+</script>
+
+</head>
+
+<body bgcolor="#000033" text="#FFFF00" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="small" onLoad="javascript:ReloadPage();">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="0%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+    <td width="20%"><img src="gfx/clearpixel.gif" width="120" height="1"></td>
+  </tr>
+  <tr> 
+    <td width="0%" align="center" background="./gfx/notavailable.gif"><a href="#Bigger" onClick="javascript:window.open('front.jpg?src=<#CurrentTrackDirectory urlencoded=1>', 'Fotofenster', 'width=480,height=400,scrollbars,resizable,dependent');" title="click to enlarge"><img src="front.jpg?src=<#CurrentTrackDirectory urlencoded=1>" width="<#inifile section=layout key=coverwidth default=160>" height="<#inifile section=layout key=coverheight default=160>" border="1" ></a></td>
+    <td width="100%" align="center" valign="top">
+<p><strong><font size="+<#inifile section=fonts key=titlesize default=1>" face="Verdana, Arial, Helvetica, sans-serif"> 
+        <#SongTitle> (<#SongLengthMin>:<#SongLengthSec>)</font></strong><br>
+        <span class="small" style="color:white"><#status on_play="playing @" on_stop=stopped, 
+        on_pause=paused> <#Bitrate>kbps, <#Samplerate>kHz <#Channels on_stereo=stereo 
+        on_mono=mono></span></p>
+      <p> track length: <#SongLengthMin>:<#SongLengthSec><br>
+        remain: -<span id="timer"><#SongRemainMin>:<#SongRemainSec></span><br>
+      </p></td>
+  </tr>
+  <tr align="center"> 
+    <td width="0%"><img src="gfx/clearpixel.gif" width="1" height="4"></td>
+    <td width="20%"><img src="gfx/clearpixel.gif" width="1" height="4"></td>
+  </tr>
+</table>
+</body>
+</html>

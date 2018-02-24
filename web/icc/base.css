@@ -1,0 +1,51 @@
+body {
+	
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+input {  font-family: Arial, Helvetica, sans-serif; font-size: 10px}
+.standard {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #FFFFFF}
+.head1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 36px; color: #FFFFFF}
+.head2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 24px; color: #FFFFFF}
+.head3 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px}
+.small {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px}
+.medium {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px}
+.highlight {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	background-color: #FFFF33;
+	color: #000033;
+}
+.nextsong {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	background-color: #000066;
+	color: #FFFFFF;
+}
+.highlight2 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #999999;
+}
+.highlight3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #000033;
+	font-size: 9px;
+	background-color: #FFFF00;
+}
+
+.centertable {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<#Charset>">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>ClonnyMusic Playlist</title>
+<link href="base.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript1.2" type="text/JavaScript1.2">
+function setCheckboxes(the_form, do_check)
+{
+var elts      = document.forms[the_form].elements['remove'];
+var elts_cnt  = elts.length;
+for (var i = 0; i < elts_cnt; i++)
+	{
+	elts[i].checked = do_check;
+    }
+return true;
+}
+
+function invertCheckboxes(the_form)
+{
+var elts      = document.forms[the_form].elements['remove'];
+var elts_cnt  = elts.length;
+for (var i = 0; i < elts_cnt; i++)
+	{
+	if(elts[i].checked) elts[i].checked = false;
+	else elts[i].checked = true;
+    }
+return true;
+}
+</script>
+
+</head>
+<body text="#FFFF00" bgcolor="#000033" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<center class="standard">
+  <p class="standard"><a href="?refresh"> refresh / exit from search</a><img src="gfx/clearpixel.gif" width="80" height="1"><a href="?addrand">add 
+    random track </a> </p>
+  <form name="form1" method="get" action="playlist.html" target="_self" class="standard">
+    search: 
+    <input name="search_playlist_string" type="text" id="search_playlist_string" value="<#search_playlist_string>">
+    &nbsp;
+    <input type="submit" name="button" value="  search  ">
+  </form>
+
+  <p class="standard"><#include file=templates/playlist_template3.html> </p>
+
+  <form name="form1" method="get" action="" class="standard">
+    save playlist: 
+    <input type="text" name="saveplaylist">&nbsp;
+    <input type="submit" name="button" value="  save  ">
+    </form>
+  </center>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<form name="browserform" enctype="application/x-www-form-urlencoded" action="medialibrary_frameset.html" method="post" target="_parent">
+  <table width="400" border="0" cellpadding="1" cellspacing="1" class="standard" bgcolor="#6666DD">
+    <tr bgcolor="#000033" class="highlight"> 
+      <td><div align="center"></div></td>
+      <td nowrap><div align="center">Artist</div></td>
+      <td nowrap><div align="center">Title (click to play)</div></td>
+      <td nowrap><div align="center">Album</div></td>
+      <td nowrap><div align="center">Length</div></td>
+      <td nowrap><div align="center">Track #</div></td>
+      <td nowrap><div align="center">Genre</div></td>
+      <td nowrap><div align="center">Year</div></td>
+      <td nowrap><div align="center">Rating</div></td>
+      <td nowrap><div align="center">Play Count</div></td>
+      <td nowrap><div align="center">Played Last</div></td>
+    </tr>
+    <#medialibrary template=templates/medialibrary_row1.html empty=templates/medialibrary_empty.html length=20> 
+    <tr bgcolor="#000033"> 
+      <td>&nbsp;</td>
+      <td nowrap><a href="#" title="select all checkboxes above" onClick="setCheckboxes('browserform', true); return false;">select 
+        all</a> <a href="#" title="invert all checkboxes above" onClick="invertCheckboxes('browserform'); return false;">invert</a> 
+        <a href="#" title="clear all checkboxes above" onClick="setCheckboxes('browserform', false); return false;">clear</a></td>
+      <td nowrap><input name="submit" title="add all selected songs to the playlist" type="submit" value="add sel"></td>
+      <td colspan="8">&nbsp;</td>
+    </tr>
+  </table>
+</form>

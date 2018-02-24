@@ -1,0 +1,16 @@
+<form name="playlistform" action="" method="post" target="_self">
+  <table width="400" border="0" cellpadding="1" cellspacing="1" bgcolor="#6666DD" class="standard">
+    <#playlist template=templates/playlist_row3.html highlight=templates/playlist_hlrow3.html 
+    empty=templates/playlist_empty.html> 
+    <tr>
+      <td colspan="2" nowrap align="right" bgcolor="#000033"><#playlist_numtracks> Tracks&nbsp;</td>
+      <td nowrap align="right" bgcolor="#000033"><#playlist_length>&nbsp;</td>
+    </tr>
+  </table>
+  <table width="400" border="0" cellpadding="1" cellspacing="1" class="standard">
+    <tr>
+      <td nowrap width="100%"><a href="#" title="select all checkboxes above" onClick="setCheckboxes('playlistform', true); return false;">select all</a> <a href="#" title="invert all checkboxes above" onClick="invertCheckboxes('playlistform'); return false;">invert</a> <a href="#" title="clear all checkboxes above" onClick="setCheckboxes('playlistform', false); return false;">clear</a></td>
+      <td nowrap><input name="submit" title="remove all selected songs from the playlist" type="submit" value="remove sel"></td>
+    </tr>
+  </table>
+</form>

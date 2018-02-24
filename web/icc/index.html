@@ -1,0 +1,447 @@
+<html>
+<head>
+	
+	<!--
+	
+	YOU MADE THIS? I MADE THIS. YOU DIDN'T MAKE SHIT. CLONTARFX MADE THIS.
+	Props and thanks to Henry Thasler for creating BrowseAmp, the guts of this experiment.
+	Live audio was added 25/02, powered by the <audio> tag, and Shoutcast DNAS.
+	
+	-->
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link href="base.css" rel="stylesheet" type="text/css">
+	<title>ClonnyMusic @ ClonnyServer TeamSpeak</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="//clonnyserver.com/js/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+		var Netscape = new Boolean();
+		
+		if (navigator.appName == "Netscape") {
+			Netscape = true;
+		}
+		
+		else Netscape = false;
+
+		var SecondsRemain = <#SongRemainSec> + <#SongRemainMin>*60;
+		var TrackPos = <#SongPositionSec> + <#SongPositionMin>*60;
+		var TotalSeconds = <#SongTotalSec>//<#SongLengthSec> + <#SongLengthMin>*60;
+		var Status = <#status on_play=true on_stop=false on_pause=false>;
+
+		var repeatstatusimg = document.getElementById("repeatstatusimage");
+
+	function ReloadPage() {
+		var currentURL  = "";
+		currentURL += document.location;
+		if(currentURL.indexOf("browser") != -1)	{
+			contentframe.location="browser_frameset.html";
+		}
+		else if(currentURL.indexOf("options") != -1) {
+			contentframe.location="options.html";
+		}
+		else if(currentURL.indexOf("playlist") != -1) {
+			contentframe.location="playlist.html";
+		}
+		else if(currentURL.indexOf("medialibrary") != -1) {
+			contentframe.location="medialibrary_frameset.html";
+		}
+		if(Status) window.setTimeout("UpdateTime()",1000);
+	}
+
+	function RequestPage(url) {
+		var currentURL  = "";
+		currentURL += document.location;
+		if(currentURL.indexOf("page=browser") != -1) {
+			
+			if(currentURL.indexOf("?") > 0)
+				var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+			else var newURL = currentURL;
+			
+			if(Netscape)
+				top.location.href = newURL + url + "&page=browser";
+			else {
+				var redir =  "top.location.href='" + newURL + url + "&page=browser'";
+				window.setTimeout(redir,0);
+			}
+		}
+
+		else if(currentURL.indexOf("page=options") != -1) {
+			if(currentURL.indexOf("?") > 0)
+				var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+			else var newURL = currentURL;
+			if(Netscape)
+				top.location.href = newURL + url + "&page=options";
+			else {
+				var redir =  "top.location.href='" + newURL + url + "&page=options'";
+				window.setTimeout(redir,0);
+			}
+		}
+
+		else if(currentURL.indexOf("page=playlist") != -1) {
+			if(currentURL.indexOf("?") > 0)
+				var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+			else var newURL = currentURL;
+			if(Netscape)
+				top.location.href = newURL + url + "&page=playlist";
+			else {
+				var redir =  "top.location.href='" + newURL + url + "&page=playlist'";
+				window.setTimeout(redir,0);
+			}
+		}
+
+		else if(currentURL.indexOf("page=medialibrary") != -1) {
+			if(currentURL.indexOf("?") > 0)
+				var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+			else var newURL = currentURL;
+			if(Netscape)
+				top.location.href = newURL + url + "&page=medialibrary";
+			else {
+				var redir =  "top.location.href='" + newURL + url + "&page=medialibrary'";
+				window.setTimeout(redir,0);
+			}
+		}
+
+		else {
+			if(currentURL.indexOf("?") > 0)
+				var newURL = currentURL.substring(0,currentURL.indexOf("?"));
+			else var newURL = currentURL;
+			if(Netscape)
+				top.location.href = newURL + url + "&page=shortplaylist";
+			else {
+				var redir =  "top.location.href='" + newURL + url + "&page=shortplaylist'";
+				window.setTimeout(redir,0);
+			}
+		}
+	}
+
+	function UpdateTime() {
+		var content="";
+		if(SecondsRemain > 0) {
+			SecondsRemain--;
+			TrackPos++;
+	}
+
+	SecondsRemain = (SecondsRemain<0)?0:SecondsRemain;
+
+	if(SecondsRemain < 600)
+		content="0";
+		content+=Math.floor(SecondsRemain/60) + ":"
+
+	if((SecondsRemain%60) < 10)
+		content+="0";
+		content+=SecondsRemain%60;
+		document.getElementById("timer").innerHTML = content;
+		content="";
+
+	if(TrackPos < 600)
+		content="0";
+		content+=Math.floor(TrackPos/60) + ":"
+
+	if((TrackPos%60) < 10)
+		content+="0";
+		content+=TrackPos%60;
+		document.getElementById("timerpos").innerHTML = content;
+		// document.getElementById("progressBar").width = Math.max(1,TrackPos/TotalSeconds*document.getElementById("progressBarCell").width) ;
+
+	if(Status)
+		window.setTimeout("UpdateTime()",1000);
+	}
+
+	function findPosX(obj) {
+		var curleft = 0;
+		if (obj.offsetParent) {
+			while (obj.offsetParent) {
+				curleft += obj.offsetLeft
+				obj = obj.offsetParent;
+			}
+		}
+		
+		else if (obj.x)
+			curleft += obj.x;
+		return curleft;
+	}
+
+	function findPosY(obj) {
+		var curtop = 0;
+		if (obj.offsetParent) {
+			while (obj.offsetParent) {
+				curtop += obj.offsetTop
+				obj = obj.offsetParent;
+			}
+		}
+		
+		else if (obj.y)
+			curtop += obj.y;
+		return curtop;
+	}
+
+	function resizeFrame() {
+		if (Netscape) {
+			// document.getElementById("innertable").style.height = window.innerHeight - 12 - findPosY(document.getElementById("probe")) + "px";
+			// document.getElementById("contentframe_id").style.height = window.innerHeight - 12 - findPosY(document.getElementById("probe")) + "px";
+		}
+	}
+
+	function addZero(i) {
+		if (i < 10) {
+		 i = "0" + i;
+		}
+	return i;
+	}
+
+	function smartReload() {
+		if (SecondsRemain == 0) {
+			// Dirty hack to ensure that we are reloading at the right time, need a better way to make sure SecondsRemain is available
+			console.log("ZERO SECONDS REMAINING? WRONG! Forcing a reload...");
+			window.location = '//music.clonnyserver.com';
+		}
+		var reloadtime = SecondsRemain * 1000;
+		// console.log("Going to reload page in " + SecondsRemain + " seconds...");
+		setTimeout(doReload, reloadtime);
+	}
+
+	function doReload() {
+		window.location = window.location.href;
+	}
+	
+		if ("<#RepeatStatus>" == 'all') {
+			// console.log("Repeat is " + "<#RepeatStatus>");
+			var repeatmode = 'all';
+		}
+		if ("<#RepeatStatus>" == 'track') {
+			// console.log("Repeat is " + "<#RepeatStatus>");
+			var repeatmode = 'track';
+		}
+		if ("<#RepeatStatus>" == 'off') {
+			// console.log("Repeat is " + "<#RepeatStatus>");
+			var repeatmode = 'off';
+		}
+
+		if ("<#ShuffleStatus>" == 'on') {
+			// console.log("Shuffle is " + "<#ShuffleStatus>");
+			var shufflemode = 'on';
+		}
+		if ("<#ShuffleStatus>" == 'off') {
+			// console.log("Shuffle is " + "<#ShuffleStatus>");
+			var shufflemode = 'off';
+		}
+
+		if ("<#status>" == 'play') {
+			// console.log("Play mode is " + "<#status>");
+			var playmode = 'play';
+		}
+		if ("<#status>" == 'pause') {
+			// console.log("Play mode is " + "<#status>");
+			var playmode = 'pause';
+		}
+
+		function startTime() {
+				var timenow = new Date();
+				var datenow = new Date();
+				var d = datenow.getDate();
+				var M = datenow.toLocaleString("en-au", { month: "short" });
+				var M = M.replace('.','');
+				var y = datenow.getFullYear();
+				var h = timenow.getHours();
+				var m = timenow.getMinutes();
+				d = checkTime(d);
+				M = checkTime(M);
+				y = checkTime(y);
+				h = checkTime(h);
+				m = checkTime(m);
+				document.getElementById("datestamp").innerHTML = d + " " + M + " " + y;
+				document.getElementById("timestamp").innerHTML = h + ":" + m;
+				var t = setTimeout(startTime, 500);
+			}
+			function checkTime(i) {
+				if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+				return i;
+			}
+
+		var bgimage = "<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>";
+
+		//jQuery to replace background-image when none found....
+
+		$.get(bgimage)
+		.error(function(d) {
+			// console.log("No background image was found...");
+   			$(document.body).css("background-image","url(./gfx/no-cover.png)");
+   			document.getElementById("coverart").src = './gfx/no-cover-thumb.png';
+		});
+		
+		(function titleScroller(text) {
+    document.title = text;
+    setTimeout(function () {
+        titleScroller(text.substr(1) + text.substr(0, 1));
+    }, 100);
+}(" <#Metadata field=title> by <#Metadata field=artist> || ClonnyMusic @ ClonnyServer TeamSpeak || "));
+
+	</script>
+</head>
+
+<body onLoad="ReloadPage();smartReload();startTime()" style="background-image:url(<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>);" text="#FFFF00" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<audio id="audio_1" controls="" autoplay="true" preload="none" style="width:16em;padding:0; display: none;">
+	<source src="http://music.clonnyserver.com:8000?type=http&amp;nocache=2" type="audio/mpeg">
+</audio>
+
+<form id="sendNext" action="/" method="post" style="display: none">
+  <input type="hidden" name="next">
+</form>
+
+<form id="sendPrev" action="/" method="post" style="display: none">
+  <input type="hidden" name="prev">
+</form>
+
+<form id="sendPause" action="/" method="post" style="display: none">
+  <input type="hidden" name="pause">
+</form>
+
+<form id="sendShuffle" action="/" method="post" style="display: none">
+  <input type="hidden" name="shuffle">
+</form>
+
+<form id="sendPlay" action="/" method="post" style="display: none">
+  <input type="hidden" name="play">
+</form>
+
+<form id="sendRepeat" action="." method="post" style="display: none">
+  <input type="hidden" name="repeat">
+</form>
+
+<form id="sendBrowser" action="" method="post" style="display: none">
+  <input type="hidden" name="browser" value="">
+</form>
+
+<table class="centertable" border="0" width="66%" height="66%" style="align-items: center; font-family: Arial; text-align:center; color:white; background: url('gfx/transparent-black-50.png');" cellpadding="0">
+	<tr>
+		<td width="14.3%" id="datestamp" style="font-size: 18px;">&nbsp;</td>
+		<td width="14.3%">&nbsp;</td>
+		<td width="14.3%">&nbsp;</td>
+		<td width="14.3%" id="timestamp" style="font-size: 36px;">&nbsp;</td>
+		<td width="14.3%">&nbsp;</td>
+		<td width="14.3%">&nbsp;</td>
+		<td width="14.3%">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="" onclick="$('#sendBrowser').submit(); return false;"><img src="./gfx/buttons/browser-trans.png" width="100" border="0"></a>
+		</td>
+		<td>
+			<a href="" onclick="$('#sendRepeat').submit(); return false;"><img id="repeatstatusimage" width="100"></a>
+		</td>
+		<td>
+			<a href="" onclick="$('#sendShuffle').submit(); return false;"><img id="shufflestatusimage" width="100"></a>
+		</td>
+		<td>
+			<strong><#status on_play="Playing", on_stop="Stopped", on_pause="Paused"></strong>
+		</td>
+		<td>
+			<a href="" onclick="$('#sendPause').submit(); return false;"><img id="playstatusimage" width="100"></a>
+		</td>
+		<td>
+			<a href="" onclick="$('#sendPrev').submit(); return false;"><img src="./gfx/buttons/RW-trans.png" alt="back" width="100" border="0"></a>
+		</td>
+		<td>
+			<a href="" onclick="$('#sendNext').submit(); return false;"><img src="./gfx/buttons/FF-trans.png" alt="next" width="100" border="0"></a>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="4" style="text-align: left" rowspan="3">
+			<font size="8"><strong><#Metadata field=title></strong></font><br><br>
+			<font size="6"><#Metadata field=artist><br><#Metadata field=album></font>
+		</td>
+		<td rowspan="2">
+			<a href="#Bigger" onClick="javascript:window.open('<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>', 'Album Art', 'width=400,height=400,scrollbars,resizable,dependent');" title="click to enlarge">
+			<img src="<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>" width="<#inifile section=layout key=coverwidth default=160>" height="<#inifile section=layout key=coverheight default=160>" id="coverart" border="0"></a>
+			<br><br>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=0"><img height=24px src="./gfx/star-32-grey.png"></a>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=1"><img height=24px src="./gfx/star-32.png"></a>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=2"><img height=24px src="./gfx/star-32.png"></a>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=3"><img height=24px src="./gfx/star-32.png"></a>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=4"><img height=24px src="./gfx/star-32.png"></a>
+			<a href="?usefile=<#CurrentTrackFilename>&rating=5"><img height=24px src="./gfx/star-32.png"></a>
+		</td>
+		<td rowspan="2"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td id="timerpos">Loading...</font></td>
+		<td><span id="timer" style="display: none; text-align: center;">&nbsp;</span></font></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+			
+		</td>
+		<td>
+			<a href="/"><img src="./gfx/buttons/home-trans.png" border="0"></a>&nbsp;<a href="ts3server://clonnyserver.com?cid=188"><img src="./gfx/buttons/teamspeak-32.png"></a>
+		</td>
+		<td>
+			
+		</td>
+		<td></td>
+		<td><center><small><font face="Verdana" size="1" color="grey">Powered by Ubuntu, PulseAudio, Wine, Shoutcast DNAS, Winamp and ClontarfX</small><center></td>
+	</tr>
+</table>
+</body>
+
+<!-- We have to update buttons after the fact because we don't get state variables immediately... -->
+
+<script>
+
+	switch (repeatmode) {
+		case 'all':
+		document.getElementById("repeatstatusimage").src = './gfx/buttons/repeat-all-trans.png';
+		break;
+
+		case 'off':
+		document.getElementById("repeatstatusimage").src = './gfx/buttons/repeat-off-trans.png';
+		break;
+	
+		case 'track':
+		document.getElementById("repeatstatusimage").src = './gfx/buttons/repeat-track-trans.png';
+
+	}
+
+	switch (shufflemode) {
+		case 'on':
+		document.getElementById("shufflestatusimage").src = './gfx/buttons/shuffle-on-trans.png';
+		break;
+
+		case 'off':
+		document.getElementById("shufflestatusimage").src = './gfx/buttons/shuffle-off-trans.png';
+
+	}
+
+	switch (playmode) {
+		case 'play':
+		// Show pause button
+		document.getElementById("playstatusimage").src = './gfx/buttons/pause-trans.png';
+		break;
+
+		case 'pause':
+		// Show play button
+		document.getElementById("playstatusimage").src = './gfx/buttons/play-trans.png';
+
+	}
+
+</script>
+
+</html>

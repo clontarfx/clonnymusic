@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>ClonnyMusic Music Browser</title>
+<link href="base.css" rel="stylesheet" type="text/css">
+</head>
+<body text="#CCCCCC" bgcolor="#000033" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<center>
+  <p class="standard"> <#include file=templates/playlist_template2.html></p>
+  
+  <p class="standard"><a href="?refresh">refresh</a></p>
+  <!-- <p class="standard"><a href="index.html?clear&page=browser" target="_top">clear playlist</a></p> -->
+<p><a name="currentsong"></a> </p>
+</center>
+</body>
+</html>
