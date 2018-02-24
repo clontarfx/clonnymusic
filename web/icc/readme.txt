@@ -1,6 +1,2 @@
-This is the new base eXtended skin.
-
-Have fun.
-
-
-(c) 2003 Henry Thasler
+Original software (c) 2003 Henry Thasler
+Modified (c) 2017 Shane Arnold
