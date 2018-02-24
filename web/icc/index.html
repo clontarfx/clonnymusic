@@ -13,7 +13,6 @@
 	<link href="base.css" rel="stylesheet" type="text/css">
 	<title>ClonnyMusic @ ClonnyServer TeamSpeak</title>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="//clonnyserver.com/js/jquery.min.js"></script>
 	
 	<script type="text/javascript">
 		var Netscape = new Boolean();
@@ -202,7 +201,15 @@
 	}
 
 	function doReload() {
-		window.location = window.location.href;
+		//window.location = window.location.href;
+		$.ajax({
+			type: "GET",
+			url: "http://music.clonnyserver.com",
+			dataType: "html",
+			success: function(data){
+				$("body").html(data);                                                          
+			}
+		}); // Faster than window.location, however still interrupts <audio> stream...
 	}
 	
 		if ("<#RepeatStatus>" == 'all') {
@@ -270,21 +277,24 @@
    			document.getElementById("coverart").src = './gfx/no-cover-thumb.png';
 		});
 		
-		(function titleScroller(text) {
-    document.title = text;
-    setTimeout(function () {
-        titleScroller(text.substr(1) + text.substr(0, 1));
-    }, 100);
-}(" <#Metadata field=title> by <#Metadata field=artist> || ClonnyMusic @ ClonnyServer TeamSpeak || "));
+		(
+			function titleScroller(text) {
+				document.title = text;
+				setTimeout(function () {
+					titleScroller(text.substr(1) + text.substr(0, 1));
+				}, 100);
+			}
+			("<#Metadata field=title> by <#Metadata field=artist> || ClonnyMusic @ ClonnyServer TeamSpeak ... ")
+		);
 
 	</script>
 </head>
 
-<body onLoad="ReloadPage();smartReload();startTime()" style="background-image:url(<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>);" text="#FFFF00" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
 <audio id="audio_1" controls="" autoplay="true" preload="none" style="width:16em;padding:0; display: none;">
 	<source src="http://music.clonnyserver.com:8000?type=http&amp;nocache=2" type="audio/mpeg">
 </audio>
+
+<body onLoad="ReloadPage();smartReload();startTime()" style="background-image:url(<#inifile section=layout key=coverfilename parse=1 default=gfx/clearpixel.gif>);" text="#FFFF00" link="#CCCCCC" vlink="#CCCCCC" alink="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <form id="sendNext" action="/" method="post" style="display: none">
   <input type="hidden" name="next">
@@ -400,7 +410,6 @@
 		<td><center><small><font face="Verdana" size="1" color="grey">Powered by Ubuntu, PulseAudio, Wine, Shoutcast DNAS, Winamp and ClontarfX</small><center></td>
 	</tr>
 </table>
-</body>
 
 <!-- We have to update buttons after the fact because we don't get state variables immediately... -->
 
@@ -443,5 +452,5 @@
 	}
 
 </script>
-
+</body>
 </html>
